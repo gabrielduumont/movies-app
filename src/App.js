@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import { createBrowserHistory } from "history";
+import { Router, Route, Switch } from "react-router-dom";
+
+import {
+  MoviesList,
+  MovieDetails
+} from './views';
+
+import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './assets/css/general.css';
+
+
+const hist = createBrowserHistory();
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router history={hist}>
+      <Switch>
+        <Route exact path="/"><MoviesList /></Route>
+        <Route exact path="/details"><MovieDetails /></Route>
+      </Switch>
+    </Router>
   );
 }
-
-export default App;
