@@ -98,17 +98,22 @@ export default function MoviesList(props) {
 
 
   const onSearchSuccess = (result) => {
-    setIsSearching(false);
     if (!result.Search) {
+      setIsSearching(false);
 
       setMessageColorClass("text-info");
       setMessage("Nenhum item encontrado.")
       updateMoviesList([]);
     }
     else {
-      updateMoviesList(result.Search);
+      omdbAPI.search.batch(result.Search, (res) => {
+        setIsSearching(false);
+        updateMoviesList(res);
+      }, onSearchError);
+      
     }
   }
+
   const onSearchError = (error) => {
     setIsSearching(false);
     setMessageColorClass("text-danger");
@@ -121,7 +126,7 @@ export default function MoviesList(props) {
     setAlphaSort(newValue);
     let sortedMovieList = Array.from(movieList);
     if (!!newValue) {
-      sortedMovieList.sort(function (a, b) {
+      sortedMovieList.sort((a, b) => {
         const x = a.Title.toLowerCase();
         const y = b.Title.toLowerCase();
         if (x < y) { return -1; }
@@ -130,7 +135,7 @@ export default function MoviesList(props) {
       });
     }
     else {
-      sortedMovieList.sort(function (a, b) {
+      sortedMovieList.sort((a, b) => {
         const x = a.Title.toLowerCase();
         const y = b.Title.toLowerCase();
         if (x < y) { return 1; }
@@ -141,8 +146,29 @@ export default function MoviesList(props) {
     updateMoviesList(sortedMovieList);
   }
   const updateRatingSort = () => {
+    const newValue = !!!ratingSort;
     setAlphaSort(null);
-    setRatingSort(!!!ratingSort);
+    setRatingSort(newValue);
+    let sortedMovieList = Array.from(movieList);
+    if (!!newValue) {
+      sortedMovieList.sort((a, b) => {
+        const x = parseFloat(a.imdbRating);
+        const y = parseFloat(b.imdbRating);
+        if (x < y) { return -1; }
+        if (x > y) { return 1; }
+        return 0;
+      });
+    }
+    else {
+      sortedMovieList.sort((a, b) => {
+        const x = parseFloat(a.imdbRating);
+        const y = parseFloat(b.imdbRating);
+        if (x < y) { return 1; }
+        if (x > y) { return -1; }
+        return 0;
+      });
+    }
+    updateMoviesList(sortedMovieList);
   }
 
   const onSubmitSearch = () => {

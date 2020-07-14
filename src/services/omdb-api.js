@@ -36,7 +36,7 @@ const omdbAPIService = {
                 });
         },
         byId: async (id, onSuccess = null, onError = null) => {
-            const url = "?apikey=" + APIkey + "&i=" + id +"&r=JSON";
+            const url = "?apikey=" + APIkey + "&i=" + id + "&r=JSON";
             await omdbAPIServiceBase({
                 method: 'get',
                 url: url,
@@ -47,6 +47,30 @@ const omdbAPIService = {
                 .catch((err) => {
                     if (!!onError) onError(err);
                 });
+        },
+        batch: async (arr, onSuccess = null, onError = null) => {
+            let promisesArr = [];
+            for (let i in arr) {
+                promisesArr.push(
+                    omdbAPIServiceBase({
+                        method: 'get',
+                        url: "?apikey=" + APIkey + "&i=" + arr[i].imdbID + "&r=JSON",
+                    })
+                );
+            }
+            let dataFetchedArr = [];
+            await Promise.all(promisesArr).then((values) => {
+                for (let i in values) {
+                    dataFetchedArr.push(
+                        {
+                            ...values[i].data
+                        }
+                    );
+                }
+            }).catch(err => {
+                if (!!onError) onError(err);
+            });
+            if (!!onSuccess) onSuccess(dataFetchedArr);
         },
     }
 };

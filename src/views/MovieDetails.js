@@ -133,7 +133,6 @@ export default function MovieDetail(props) {
     if (!selectedMovie) history.push("/");
     else {
       if (!selectedMovie.details) getDetailedInfo();
-      else console.log(parseDetails(selectedMovie.details));
     }
   }, [selectedMovie, history, dispatch]);
 

@@ -7,25 +7,25 @@ import {
     Col
 } from 'react-bootstrap';
 
+
 const ListItem = (props) => {
     const data = props.data;
     const onCheckDetails = props.onCheckDetails;
     const onClick = () => {
-        if(!!onCheckDetails) onCheckDetails(data);
+        if (!!onCheckDetails) onCheckDetails(data);
     }
     return (
         <Col sm={12} md={4} lg={3} className="p-2">
-            <Card >
+            <Card className="clickable" onClick={onClick}>
                 <Card.Body>
                     <div className="w-100 d-flex flex-row justify-content-center align-items-center">
                         {data.Poster !== 'N/A' ? <Image src={data.Poster} thumbnail fluid /> : null}
                     </div>
                     <Card.Title className="pt-2 mb-0">{data.Title}</Card.Title>
-                    <Card.Text>
-                        <small className="text-muted">Ano: {data.Year}</small>
+                    <Card.Text className="p-0 py-1 m-0 d-flex w-100 flex-row align-items-center">
+                        <span className="mdi mdi-star text-warning"></span>
+                        <span className="text-muted">{data.imdbRating}/10</span>
                     </Card.Text>
-
-                    <Button variant="primary" block onClick={onClick}><span className="mdi mdi-magnify"></span> Detalhes</Button>
                 </Card.Body>
             </Card>
         </Col>
@@ -39,9 +39,8 @@ export default function List(props) {
         <>
             <Row>
                 {data.map(item => {
-                    //console.log(item);
                     return (
-                        <ListItem key={item.imdbID} data={item} onCheckDetails={onCheckDetails}/>
+                        <ListItem key={item.imdbID} data={item} onCheckDetails={onCheckDetails} />
                     );
                 })}
             </Row>

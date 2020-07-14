@@ -3,3 +3,8 @@ html, body, #root{
     height: 100% !important;
     background-color: #222;
 }
+
+
+.clickable:hover{
+    cursor:  pointer !important;
+}
