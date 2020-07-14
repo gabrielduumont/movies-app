@@ -1,21 +1,5 @@
 html, body, #root{
     width: 100% !important;
     height: 100% !important;
-    display: flex !important;
-    flex: 1 !important;
-    flex-direction: column !important;
-    flex-wrap: wrap !important;
-    overflow: hidden !important;
-    justify-content: flex-start !important;
-    align-items: flex-start !important;
-}
-
-.dti-bg-wrapper{
-    background-attachment: fixed !important;
-    background-size: cover !important;
-    background-repeat: no-repeat !important;
-}
-
-.dti-overlay{
-    background-color: rgba(0,0,0,.75);
+    background-color: #222;
 }

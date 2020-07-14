@@ -2,8 +2,9 @@
 import * as Actions from '../actions/movies';
 
 const initialState = {
-    movies: null,
-    selectedMovie: null
+    movies: {
+        list: []
+    },
 };
 
 const reducer = (state = initialState, action) => {
@@ -13,6 +14,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 movies: {
+                    ...state.movies,
                     ...action.data.movies
                 },
             };
