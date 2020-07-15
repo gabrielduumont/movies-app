@@ -1,11 +1,11 @@
 
-## Pré-requisito (opcional)
+## Pré-requisito [opcional]
 
 Este projeto foi desenvolvido utilizando yarn como gerenciador de pacotes, portanto para manter a consistência utilize o yarn.<br />
 Caso não possua yarn na sua máquina, basta rodar via CMD o comando abaixo: 
 ### `npm i -g yarn`
 
-## Setup - yarn
+## 1.1. Setup - yarn
 
 Via CMD, navegue até o diretório do projeto e rode:
 
@@ -19,7 +19,7 @@ Este comando irá iniciar o app em modo de desenvolvimento.<br />
 Abra [http://localhost:3000](http://localhost:3000) para visualizar no seu browser.<br />
 
 
-## Setup - npm
+## 1.2. Setup - npm
 
 Via CMD, navegue até o diretório do projeto e rode:
 
@@ -32,8 +32,39 @@ Este comando irá baixar os pacotes necessários para execução do software.<br
 Este comando irá iniciar o app em modo de desenvolvimento.<br />
 Abra [http://localhost:3000](http://localhost:3000) para visualizar no seu browser.<br />
 
+
+## 2. Build - yarn ou npm () [opcional]
+
+Após o setup de sua preferência, rode na pasta do projeto:
+
+### `npm build`
+
+ou
+
+### `yarn build`
+
+Este comando irá gerar os arquivos de produção do app dentro da pasta "build".<br />
+Observação: Este projeto já contem uma build que está pronta pra ser servida, para isto basta seguir os passos do item "3. Servindo o app em produção".
+
+## 3. Servindo o app em produção
+
+Caso ainda não tenha instalado em sua máquina o pacote "serve", instale-o pelo comando:
+
+### `npm i -g serve`
+
+ou
+
+### `yarn global add serve`
+
+Em seguida, rode o seguinte comando na pasta do projeto:
+
+### `serve -s build`
+
+Este comando irá iniciar a execução da produção app.<br />
+Abra [http://localhost:5000](http://localhost:5000) para visualizar no seu browser.<br />
+
 ## Demais Scripts
 
-Os scripts "yarn build", "yarn test", "yarn eject" foram removidos deste projeto pelos seguintes motivos:<br />
-- "yarn build" e "yarn eject": Por não ter um(a) necessidade/uso específico por se tratar de um aplicativo demo
+Os scripts "yarn test" e "yarn eject" foram removidos deste projeto pelos seguintes motivos:<br />
+- "yarn eject": Por não ter um(a) necessidade/uso específico por se tratar de um aplicativo demo
 - "yarn test": pela falta de conhecimento do autor sobre testes automatizados.
