@@ -1,7 +1,6 @@
 import React from 'react';
 import {
     Card,
-    Button,
     Image,
     Row,
     Col
@@ -24,7 +23,7 @@ const ListItem = (props) => {
                     <Card.Title className="pt-2 mb-0">{data.Title}</Card.Title>
                     <Card.Text className="p-0 py-1 m-0 d-flex w-100 flex-row align-items-center">
                         <span className="mdi mdi-star text-warning"></span>
-                        <span className="text-muted">{data.imdbRating}/10</span>
+                        <span className="text-muted">{data.imdbRating === "N/A" ? "0" : data.imdbRating}/10</span>
                     </Card.Text>
                 </Card.Body>
             </Card>

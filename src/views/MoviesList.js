@@ -37,7 +37,7 @@ export default function MoviesList(props) {
   const [alphaSort, setAlphaSort] = useState(null);
   const [ratingSort, setRatingSort] = useState(null);
 
-  
+
   const onCheckDetails = (data) => {
     const dispatchData = {
       movies: {
@@ -98,6 +98,8 @@ export default function MoviesList(props) {
 
 
   const onSearchSuccess = (result) => {
+    setAlphaSort(null);
+    setRatingSort(null);
     if (!result.Search) {
       setIsSearching(false);
 
@@ -110,7 +112,7 @@ export default function MoviesList(props) {
         setIsSearching(false);
         updateMoviesList(res);
       }, onSearchError);
-      
+
     }
   }
 
@@ -152,8 +154,8 @@ export default function MoviesList(props) {
     let sortedMovieList = Array.from(movieList);
     if (!!newValue) {
       sortedMovieList.sort((a, b) => {
-        const x = parseFloat(a.imdbRating);
-        const y = parseFloat(b.imdbRating);
+        const x = parseFloat(a.imdbRating === "N/A" ? 0 : a.imdbRating);
+        const y = parseFloat(b.imdbRating === "N/A" ? 0 : b.imdbRating);
         if (x < y) { return -1; }
         if (x > y) { return 1; }
         return 0;
@@ -161,8 +163,8 @@ export default function MoviesList(props) {
     }
     else {
       sortedMovieList.sort((a, b) => {
-        const x = parseFloat(a.imdbRating);
-        const y = parseFloat(b.imdbRating);
+        const x = parseFloat(a.imdbRating === "N/A" ? 0 : a.imdbRating);
+        const y = parseFloat(b.imdbRating === "N/A" ? 0 : b.imdbRating);
         if (x < y) { return 1; }
         if (x > y) { return -1; }
         return 0;
@@ -250,7 +252,10 @@ export default function MoviesList(props) {
               !!isSearching ?
                 <Loading />
                 :
-                <List data={movieList} onCheckDetails={onCheckDetails} />
+                <>
+                  <p className="text-muted"><small>Mostrando {movieList.length} resultados.</small></p>
+                  <List data={movieList} onCheckDetails={onCheckDetails} />
+                </>
           }
         </Col>
       </Row>

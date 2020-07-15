@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {  useEffect } from 'react';
 import {
   Row,
   Col,
@@ -9,11 +9,9 @@ import {
 import { useHistory } from "react-router-dom";
 import {
   Layout,
-  Loading
 } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { update } from '../redux/actions/movies';
-import omdbAPI from '../services/omdb-api';
 
 const parseMovieType = (type) => {
   switch (type.toLowerCase()) {
@@ -96,45 +94,10 @@ export default function MovieDetail(props) {
   const history = useHistory();
   const dispatch = useDispatch();
   const selectedMovie = useSelector(state => state.movies.selectedMovie);
-  const [isSearching, setIsSearching] = useState(false);
-  const [error, setError] = useState(null);
-
-
-
-
-  const onDetailError = (error) => {
-    setIsSearching(false);
-    setError("Erro ao buscar informações na API.");
-  }
-
 
   useEffect(() => {
-
-    const onDetailSuccess = (result) => {
-      setIsSearching(false);
-      const dispatchData = {
-        movies: {
-          selectedMovie: {
-            ...selectedMovie,
-            details: {
-              ...result
-            }
-          }
-        }
-      }
-      dispatch(update(dispatchData));
-    }
-
-    const getDetailedInfo = () => {
-      setIsSearching(true);
-      omdbAPI.search.byId(selectedMovie.imdbID, onDetailSuccess, onDetailError);
-    }
-
     if (!selectedMovie) history.push("/");
-    else {
-      if (!selectedMovie.details) getDetailedInfo();
-    }
-  }, [selectedMovie, history, dispatch]);
+  }, [selectedMovie, history]);
 
   const onNavigateBack = () => {
     const dispatchData = {
@@ -176,19 +139,15 @@ export default function MovieDetail(props) {
             <p className="w-100 m-0 text-muted">Ano: {selectedMovie.Year}</p>
             <p className="w-100 m-0 text-muted">Tipo: {parseMovieType(selectedMovie.Type)}</p>
           </Col>
-          {!error ? null : <Col sm={12} md={12} lg={12}><p className="text-danger">{error}</p></Col>}
 
           <Col sm={12} md={12} lg={12}>
 
             {
-              !!isSearching ?
-                <Loading />
-                :
-                !!selectedMovie.details ?
+                !!selectedMovie ?
                   <>
                     <Table responsive>
                       <tbody>
-                        {parseDetails(selectedMovie.details).map(item => {
+                        {parseDetails(selectedMovie).map(item => {
                           return (
                             <tr key={item.id}>
                               <th width="30%">{item.label}</th>
