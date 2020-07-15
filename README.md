@@ -33,7 +33,7 @@ Este comando irá iniciar o app em modo de desenvolvimento.<br />
 Abra [http://localhost:3000](http://localhost:3000) para visualizar no seu browser.<br />
 
 
-## 2. Build - yarn ou npm () [opcional]
+## 2. Build - yarn ou npm [opcional]
 
 Após o setup de sua preferência, rode na pasta do projeto:
 
@@ -46,7 +46,7 @@ ou
 Este comando irá gerar os arquivos de produção do app dentro da pasta "build".<br />
 Observação: Este projeto já contem uma build que está pronta pra ser servida, para isto basta seguir os passos do item "3. Servindo o app em produção".
 
-## 3. Servindo o app em produção
+## 3. Servindo o app em produção [opcional]
 
 Caso ainda não tenha instalado em sua máquina o pacote "serve", instale-o pelo comando:
 
