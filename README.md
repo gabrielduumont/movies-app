@@ -63,8 +63,3 @@ Em seguida, rode o seguinte comando na pasta do projeto:
 Este comando irá iniciar a execução da produção app.<br />
 Abra [http://localhost:5000](http://localhost:5000) para visualizar no seu browser.<br />
 
-## Demais Scripts
-
-Os scripts "yarn test" e "yarn eject" foram removidos deste projeto pelos seguintes motivos:<br />
-- "yarn eject": Por não ter um(a) necessidade/uso específico por se tratar de um aplicativo demo
-- "yarn test": pela falta de conhecimento do autor sobre testes automatizados.

@@ -211,6 +211,7 @@ export default function MoviesList(props) {
             onAfterChange={onUpdateName}
             required
             onSubmit={onSubmitSearch}
+            minChar={3}
           />
         </Col>
         <Col sm={12} md={3} lg={3}>

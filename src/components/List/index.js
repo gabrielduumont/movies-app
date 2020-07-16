@@ -5,6 +5,7 @@ import {
     Row,
     Col
 } from 'react-bootstrap';
+import BgPlaceholder from '../../assets/img/bg-placeholder.jpg';
 
 
 const ListItem = (props) => {
@@ -16,15 +17,17 @@ const ListItem = (props) => {
     return (
         <Col sm={12} md={4} lg={3} className="p-2">
             <Card className="clickable" onClick={onClick}>
-                <Card.Body>
-                    <div className="w-100 d-flex flex-row justify-content-center align-items-center">
-                        {data.Poster !== 'N/A' ? <Image src={data.Poster} thumbnail fluid /> : null}
+                <Card.Img variant="top" src={data.Poster !== 'N/A' ? data.Poster : BgPlaceholder} className="dti-poster" />
+                <Card.Body className="p-2">
+                    <div className="dti-poster-card-body d-flex flex-column flex-wrap justify-content-start align-items-start">
+                        <Card.Subtitle className="p-0 m-0">
+                            {data.Title}
+                        </Card.Subtitle>
+                        <Card.Text className="p-0 pt-1 m-0 d-flex w-100 flex-row align-items-center">
+                            <span className="mdi mdi-star text-warning"></span>
+                            <span className="text-muted">{data.imdbRating === "N/A" ? "0" : data.imdbRating}/10</span>
+                        </Card.Text>
                     </div>
-                    <Card.Title className="pt-2 mb-0">{data.Title}</Card.Title>
-                    <Card.Text className="p-0 py-1 m-0 d-flex w-100 flex-row align-items-center">
-                        <span className="mdi mdi-star text-warning"></span>
-                        <span className="text-muted">{data.imdbRating === "N/A" ? "0" : data.imdbRating}/10</span>
-                    </Card.Text>
                 </Card.Body>
             </Card>
         </Col>

@@ -8,3 +8,13 @@ html, body, #root{
 .clickable:hover{
     cursor:  pointer !important;
 }
+
+.dti-poster{
+    min-height: 10rem !important;
+    max-height: 10rem !important;
+    object-fit: cover;
+}
+
+.dti-poster-card-body{
+    /* min-height: 4.3rem !important; */
+}

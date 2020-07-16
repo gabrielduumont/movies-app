@@ -11,6 +11,7 @@ export default function SearchInput(props) {
     const placeholder = !!props.placeholder ? !!required ? props.placeholder + " (obrigatório)" : props.placeholder : "";
     const maxYear = type === "year" ? new Date().getFullYear() : null;
     const minYear = type === "year" ? 1895 : null;
+    const minChar = !!props.minChar ? props.minChar : null;
     const inputProps = type === "year" ? { min: minYear, max: maxYear } : null;
     const [error, setError] = useState(null);
     const [value, setValue] = useState("");
@@ -24,6 +25,10 @@ export default function SearchInput(props) {
         if (!!required) {
             if (!newVal) setError("Este campo é obrigatório!");
             else setError(null);
+            if(!!minChar){
+                if(newVal.length < minChar) setError("Você precisa preencher pelo menos "+ minChar + " caracteres.");
+                else setError(null);
+            }
         }
         if (type === "year") {
             if (!!newVal && newVal.length >= 4 && !(parseInt(newVal) >= minYear && parseInt(newVal) <= maxYear)) {
@@ -40,6 +45,11 @@ export default function SearchInput(props) {
         if (!!required) {
             if (!newVal) setError("Este campo é obrigatório!");
             else setError(null);
+            if(!!minChar){
+                if(newVal.length < minChar) setError("Você precisa preencher pelo menos "+ minChar + " caracteres.");
+                else setError(null);
+            }
+            
         }
         if (type === "year") {
             if (!!newVal ) {
